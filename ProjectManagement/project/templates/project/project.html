@@ -3,8 +3,7 @@
 
 {% if project.description %}
 <p class="mb-6 text-lg text-gray-600">{{ project.description }}</p>
-{% endif %}
-
+{% endif %} {% if user.is_authenticated %}
 <div class="mb-8 flex space-x-4">
   <a
     href="{% url 'todolist:add' project.id %}"
@@ -22,6 +21,7 @@
     >Delete</a
   >
 </div>
+{% endif %}
 
 <h2 class="mt-6 text-2xl font-semibold text-gray-800">Todo Lists</h2>
 
@@ -38,6 +38,7 @@
   {% endfor %}
 </div>
 
+{% if user.is_authenticated %}
 <h2 class="mt-10 text-2xl font-semibold text-gray-800">Files</h2>
 
 <a
@@ -88,4 +89,4 @@
   </div>
   {% endfor %}
 </div>
-{% endblock %}
+{% endif %} {% endblock %}

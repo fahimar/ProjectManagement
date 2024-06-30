@@ -23,6 +23,7 @@ class ProjectFile(models.Model):
     def __str__(self):
         return self.name
     
+
 class ProjectNote(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     project = models.ForeignKey(Project, related_name='notes', on_delete=models.CASCADE)
