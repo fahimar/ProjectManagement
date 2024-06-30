@@ -1,88 +1,89 @@
 {% extends 'core/base.html' %} {% block content %}
-<h1 class="mb-6 text-3xl">{{ project.name }}</h1>
+<h1 class="mb-8 text-4xl font-bold text-gray-800">{{ project.name }}</h1>
 
 {% if project.description %}
-<p class="mb-6">{{ project.description }}</p>
+<p class="mb-6 text-lg text-gray-600">{{ project.description }}</p>
 {% endif %}
 
-<a
-  href="{% url 'todolist:add' project.id %}"
-  class="py-4 px-8 bg-emerald-600 text-white inline-block"
-  >Add todolist</a
->
-<a
-  href="{% url 'project:edit' project.id %}"
-  class="py-4 px-8 bg-sky-600 text-white inline-block"
-  >Edit</a
->
-<a
-  href="{% url 'project:delete' project.id %}"
-  class="py-4 px-8 bg-amber-600 text-white inline-block"
-  >Delete</a
->
+<div class="mb-8 flex space-x-4">
+  <a
+    href="{% url 'todolist:add' project.id %}"
+    class="py-3 px-6 bg-emerald-600 text-white rounded-lg shadow-md hover:bg-emerald-700 transition"
+    >Add Todo List</a
+  >
+  <a
+    href="{% url 'project:edit' project.id %}"
+    class="py-3 px-6 bg-sky-600 text-white rounded-lg shadow-md hover:bg-sky-700 transition"
+    >Edit</a
+  >
+  <a
+    href="{% url 'project:delete' project.id %}"
+    class="py-3 px-6 bg-amber-600 text-white rounded-lg shadow-md hover:bg-amber-700 transition"
+    >Delete</a
+  >
+</div>
 
-<h2 class="mt-6 text-2xl">Todo lists</h2>
+<h2 class="mt-6 text-2xl font-semibold text-gray-800">Todo Lists</h2>
 
-<div class="mt-6 grid grid-cols-4 gap-4">
+<div class="mt-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
   {% for todolist in project.todolists.all %}
-  <div class="py-6 px-6 bg-slate-200">
+  <div class="p-6 bg-white rounded-lg shadow-md hover:shadow-lg transition">
     <a href="{% url 'todolist:todolist' project.id todolist.id %}">
-      <h3 class="mb-4 text-xl">{{ todolist.name }}</h3>
-
-      <p class="text-sm text-slate-600">{{ todolist.description }}</p>
+      <h3 class="mb-2 text-xl font-semibold text-gray-700">
+        {{ todolist.name }}
+      </h3>
+      <p class="text-sm text-gray-500">{{ todolist.description }}</p>
     </a>
   </div>
   {% endfor %}
 </div>
 
-<h2 class="mt-6 text-2xl">Files</h2>
+<h2 class="mt-10 text-2xl font-semibold text-gray-800">Files</h2>
 
 <a
   href="{% url 'project:upload_file' project.id %}"
-  class="mt-6 py-4 px-8 bg-slate-600 text-white inline-block"
-  >Upload file</a
+  class="mt-6 py-3 px-6 bg-slate-600 text-white rounded-lg shadow-md hover:bg-slate-700 transition inline-block"
+  >Upload File</a
 >
 
-<div class="mt-6 grid grid-cols-4 gap-4">
+<div class="mt-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
   {% for projectfile in project.files.all %}
-  <div class="py-6 px-6 bg-slate-200">
-    <h3 class="mb-4 text-xl">{{ projectfile.name }}</h3>
-
-    <a
-      href="{{ projectfile.attachment.url }}"
-      target="_blank"
-      class="text-sm text-slate-600"
-    >
-      Download file
-    </a>
-
-    |
-
-    <a
-      href="{% url 'project:delete_file' project.id projectfile.id %}"
-      class="text-sm text-slate-600"
-    >
-      Delete
-    </a>
+  <div class="p-6 bg-white rounded-lg shadow-md hover:shadow-lg transition">
+    <h3 class="mb-2 text-xl font-semibold text-gray-700">
+      {{ projectfile.name }}
+    </h3>
+    <div class="flex space-x-2">
+      <a
+        href="{{ projectfile.attachment.url }}"
+        target="_blank"
+        class="text-sm text-blue-600 hover:underline"
+        >Download File</a
+      >
+      <span class="text-sm text-gray-400">|</span>
+      <a
+        href="{% url 'project:delete_file' project.id projectfile.id %}"
+        class="text-sm text-red-600 hover:underline"
+        >Delete</a
+      >
+    </div>
   </div>
   {% endfor %}
 </div>
 
-<h2 class="mt-6 text-2xl">Notes</h2>
+<h2 class="mt-10 text-2xl font-semibold text-gray-800">Notes</h2>
 
 <a
   href="{% url 'project:add_note' project.id %}"
-  class="mt-6 py-4 px-8 bg-slate-600 text-white inline-block"
-  >Add note</a
+  class="mt-6 py-3 px-6 bg-slate-600 text-white rounded-lg shadow-md hover:bg-slate-700 transition inline-block"
+  >Add Note</a
 >
 
-<div class="mt-6 grid grid-cols-4 gap-4">
+<div class="mt-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
   {% for note in project.notes.all %}
-  <div class="py-6 px-6 bg-slate-200">
+  <div class="p-6 bg-white rounded-lg shadow-md hover:shadow-lg transition">
     <a href="{% url 'project:note_detail' project.id note.id %}">
-      <h3 class="mb-4 text-xl">{{ note.name }}</h3>
-
-      <p class="text-sm text-slate-600">{{ note.body|truncatechars:50 }}</p>
+      <h3 class="mb-2 text-xl font-semibold text-gray-700">{{ note.name }}</h3>
+      <p class="text-sm text-gray-500">{{ note.body|truncatechars:50 }}</p>
     </a>
   </div>
   {% endfor %}

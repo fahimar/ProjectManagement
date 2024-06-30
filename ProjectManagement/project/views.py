@@ -67,7 +67,7 @@ def delete(request, pk):
     return redirect('/projects/')
 
 
-# Files
+# Files Functionalities
 
 
 @login_required
@@ -101,7 +101,7 @@ def delete_file(request, project_id, pk):
     return redirect(f'/projects/{project_id}/')
 
 
-# Notes
+# Notes Functionalities
 
 
 @login_required

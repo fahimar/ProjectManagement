@@ -6,37 +6,46 @@
     <script src="https://cdn.tailwindcss.com"></script>
   </head>
 
-  <body>
-    <nav class="py-6 px-8 flex items-center justify-between bg-slate-800">
-      <h1 class="text-xl text-white">
+  <body class="bg-gray-100 text-gray-900">
+    <nav
+      class="py-6 px-8 flex items-center justify-between bg-slate-800 shadow-lg"
+    >
+      <h1 class="text-xl font-bold text-white">
         <a href="{% url 'core:index' %}">ProjectManagement</a>
       </h1>
 
       <div class="space-x-4">
-        <a href="{% url 'core:about' %}" class="text-white">About</a>
+        <a
+          href="{% url 'core:about' %}"
+          class="text-white hover:text-gray-300 transition"
+          >About</a
+        >
 
         {% if request.user.is_authenticated %}
         <a
           href="{% url 'project:projects' %}"
-          class="py-4 px-8 bg-sky-600 text-white"
+          class="py-2 px-6 bg-sky-600 text-white rounded-lg shadow-md hover:bg-sky-700 transition"
           >Projects</a
         >
         {% else %}
         <a
           href="{% url 'account:login' %}"
-          class="py-4 px-8 bg-slate-600 text-white"
+          class="py-2 px-6 bg-slate-600 text-white rounded-lg shadow-md hover:bg-slate-700 transition"
           >Log in</a
         >
         <a
           href="{% url 'account:signup' %}"
-          class="py-4 px-8 bg-sky-600 text-white"
+          class="py-2 px-6 bg-sky-600 text-white rounded-lg shadow-md hover:bg-sky-700 transition"
           >Sign up</a
         >
         {% endif %}
       </div>
     </nav>
 
-    <main class="py-6 px-8">{% block content %} {% endblock %}</main>
+    <main class="py-8 px-8 md:px-16 lg:px-24">
+      {% block content %} {% endblock %}
+    </main>
+
     <footer class="py-8 px-8 bg-slate-900 text-center">
       <p class="text-white">Simple ProjectManagement 2024</p>
     </footer>
